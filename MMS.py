@@ -1,6 +1,7 @@
 from tkinter import*
 import tkinter
 from PIL import Image,ImageTk
+from tkinter import Button
 from tkinter import ttk
 from tkinter import messagebox
 import datetime
@@ -34,7 +35,7 @@ class MedicineManagementSystem:
 
 
         img3 = Image.open("logo.jpg")
-        img3 = img3.resize((80,80), Image.ANTIALIAS)
+        img3 = img3.resize((80,80), Image.LANCZOS)
         self.photoImg3 =  ImageTk.PhotoImage(img3)
         b3 =Button(self.root,image=self.photoImg3,text="Mahesh Pharma",borderwidth=0,font=("times new roman",22,"bold"),fg="white",cursor="hand2")
         b3.place(x=70,y=18)
@@ -54,19 +55,19 @@ class MedicineManagementSystem:
         # =======images=======================================================
 
         img1 = Image.open("lab.jpg")
-        img1 = img1.resize((150,135), Image.ANTIALIAS)
+        img1 = img1.resize((150,135), Image.LANCZOS)
         self.photoImg1 =  ImageTk.PhotoImage(img1)
         b4 =Button(self.root,image=self.photoImg1,text="Mahesh Pharma",borderwidth=0,font=("times new roman",22,"bold"),fg="white",cursor="hand2")
         b4.place(x=770,y=330)
 
         img2 = Image.open("mask.jpg")
-        img2 = img2.resize((150,135), Image.ANTIALIAS)
+        img2 = img2.resize((150,135), Image.LANCZOS)
         self.photoImg2 =  ImageTk.PhotoImage(img2)
         b4 =Button(self.root,image=self.photoImg2,text="Mahesh Pharma",borderwidth=0,font=("times new roman",22,"bold"),fg="white",cursor="hand2")
         b4.place(x=620,y=330)
 
         img4 = Image.open("eng.jpg")
-        img4 = img4.resize((150,135), Image.ANTIALIAS)
+        img4 = img4.resize((150,135), Image.LANCZOS)
         self.photoImg4 =  ImageTk.PhotoImage(img4)
         b5 =Button(self.root,image=self.photoImg4,text="Mahesh Pharma",borderwidth=0,font=("times new roman",22,"bold"),fg="white",cursor="hand2")
         b5.place(x=475,y=330)
@@ -117,7 +118,7 @@ class MedicineManagementSystem:
         FrameDetails=Frame(self.root,bd=15,padx=20,relief=RIDGE)
         FrameDetails.place(x=0,y=590,width=1530,height=210)
 
-        conn=mysql.connector.connect(host="localhost",username="root",password="Test@123",database="mms")
+        conn=mysql.connector.connect(host="localhost",username="root",password="root",database="mms")
         my_cursor=conn.cursor()
         my_cursor.execute("select ref from medicine")
         r=my_cursor.fetchall()
@@ -146,7 +147,7 @@ class MedicineManagementSystem:
         comTypeofMedicine.grid(row=2,column=1)
 
         # ==========AddMedicine============
-        conn=mysql.connector.connect(host="localhost",username="root",password="Test@123",database="mms")
+        conn=mysql.connector.connect(host="localhost",username="root",password="root",database="mms")
         my_cursor=conn.cursor()
         my_cursor.execute("select MedicineName from medicine")
         ide=my_cursor.fetchall()
@@ -218,20 +219,20 @@ class MedicineManagementSystem:
         # ============variables medicine=============
 
         img5 = Image.open("pills.jpg")
-        img5 = img5.resize((200,75), Image.ANTIALIAS)
+        img5 = img5.resize((200,75), Image.LANCZOS)
         self.photoImg5 =  ImageTk.PhotoImage(img5)
         b6 =Button(self.root,image=self.photoImg5,text="Mahesh Pharma",borderwidth=0,font=("times new roman",22,"bold"),fg="white",cursor="hand2")
         b6.place(x=960,y=160)
 
         img6 = Image.open("tablet.jpg")
-        img6 = img6.resize((100,75), Image.ANTIALIAS)
+        img6 = img6.resize((100,75), Image.LANCZOS)
         self.photoImg6 =  ImageTk.PhotoImage(img6)
         b6 =Button(self.root,image=self.photoImg6,text="Mahesh Pharma",borderwidth=0,font=("times new roman",22,"bold"),fg="white",cursor="hand2")
         b6.place(x=1160,y=160)
 
         
         img7 = Image.open("tab.jpg")
-        img7 = img7.resize((200,145), Image.ANTIALIAS)
+        img7 = img7.resize((200,145), Image.LANCZOS)
         self.photoImg7 =  ImageTk.PhotoImage(img7)
         b6 =Button(self.root,image=self.photoImg7,text="Mahesh Pharma",borderwidth=0,font=("times new roman",22,"bold"),fg="white",cursor="hand2")
         b6.place(x=1270,y=160)
@@ -345,7 +346,7 @@ class MedicineManagementSystem:
 
     # ===================== MedicineAdd=================================================================      
     def add_medicine(self):
-        conn=mysql.connector.connect(host="localhost",username="root",password="Test@123",database="mms")
+        conn=mysql.connector.connect(host="localhost",username="root",password="root",database="mms")
         my_cursor=conn.cursor()
         my_cursor.execute("insert into medicine(ref,MedicineName) values(%s,%s)",(                                                        
                                                                             self.ref_add_var.get(),
@@ -365,7 +366,7 @@ class MedicineManagementSystem:
     # ===================fetch data ============================================================
 
     def fetch_Medicine_data(self):
-        conn=mysql.connector.connect(host='localhost',username='root',password='Test@123',database='mms')
+        conn=mysql.connector.connect(host='localhost',username='root',password='root',database='mms')
         my_cursor=conn.cursor()
         my_cursor.execute("select * from medicine")
         rows=my_cursor.fetchall()
@@ -393,7 +394,7 @@ class MedicineManagementSystem:
     def medDelete(self):
         mDelete=messagebox.askyesno("Medicine Management System","Do you delete this Medicine")
         if mDelete>0:
-            conn=mysql.connector.connect(host="localhost",username="root",password="Test@123",database="mms")
+            conn=mysql.connector.connect(host="localhost",username="root",password="root",database="mms")
             my_cursor=conn.cursor()
             sql="delete from medicine where ref=%s"
             val=(self.ref_add_var.get(),)
@@ -412,7 +413,7 @@ class MedicineManagementSystem:
                 messagebox.showwarning("Warning","All fields are required")
             else:
                 try:
-                    conn=mysql.connector.connect(host="localhost",username="root",password="Test@123",database="mms")
+                    conn=mysql.connector.connect(host="localhost",username="root",password="root",database="mms")
                     my_cursor=conn.cursor()
                     my_cursor.execute("update medicine set MedicineName=%s where ref=%s",(
                                                                                             self.medicine_add_var.get(),
@@ -436,7 +437,7 @@ class MedicineManagementSystem:
         
         else:
             try:
-                conn=mysql.connector.connect(host="localhost",username="root",password="Test@123",database="mms")
+                conn=mysql.connector.connect(host="localhost",username="root",password="root",database="mms")
                 my_cursor=conn.cursor()
                 my_cursor.execute("insert into pharmacy values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(
                 
@@ -468,7 +469,7 @@ class MedicineManagementSystem:
         if self.ref_var.get()=="":
             messagebox.showerror("Error","All Fields Are Required")
         else:
-            conn=mysql.connector.connect(host='localhost',username='root',password='Test@123',database='mms')
+            conn=mysql.connector.connect(host='localhost',username='root',password='root',database='mms')
             my_cursor=conn.cursor()
             my_cursor.execute("update pharmacy set CompanyName=%s,TypeOfMedicine=%s,medname=%s,lot=%s,issuedate=%s,expdate=%s,uses=%s,sideeffect=%s,warning=%s,dosage=%s,price=%s,product=%s where Ref=%s",(
                                                                                 
@@ -501,7 +502,7 @@ class MedicineManagementSystem:
 
     # ====================fetchdata=================================================
     def fatch_data(self):
-        conn=mysql.connector.connect(host="localhost",username="root",password="Test@123",database="mms")
+        conn=mysql.connector.connect(host="localhost",username="root",password="root",database="mms")
         my_cursor=conn.cursor()
         my_cursor.execute("select * from pharmacy")
         rows=my_cursor.fetchall()
@@ -537,7 +538,7 @@ class MedicineManagementSystem:
         if self.lot_var.get()=="":
             messagebox.showinfo("ERROR","First Select the Details!!")
         else:
-            conn=mysql.connector.connect(host='localhost',username='root',password='Test@123',database='mms')
+            conn=mysql.connector.connect(host='localhost',username='root',password='root',database='mms')
             my_cursor=conn.cursor()
             query="delete from pharmacy where Ref=%s"
             value=(self.ref_var.get(),)
@@ -574,7 +575,7 @@ class MedicineManagementSystem:
 
    
     def search_data(self):
-        conn=mysql.connector.connect(host='localhost',username='root',password='Test@123',database='mms')
+        conn=mysql.connector.connect(host='localhost',username='root',password='root',database='mms')
         my_cursor=conn.cursor()
         my_cursor.execute("select * from pharmacy where " +str(self.serch_var.get())+" LIKE '%"+str(self.serchTxt_var.get())+"%'")
         rows=my_cursor.fetchall()
